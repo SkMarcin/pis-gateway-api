@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: Authentication
+          uri: http://localhost:8005
+          predicates:
+            - Path=/auth/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+
+# Enable the JwtAuthenticationFilter in Gateway
+server:
+  port: 8080
