@@ -6,6 +6,8 @@ pipeline {
         NEXUS_URL = "127.0.0.1:8081"
         NEXUS_REPOSITORY = "system-biblioteczny-maven-nexus-repo"
         NEXUS_CREDENTIAL_ID = "nexus-user-credentials"
+        DOCKER_IMAGE = "gateway-api"
+        DOCKER_TAG = "${env.BUILD_NUMBER}"
     }
     stages {
         stage('Build') {
@@ -13,7 +15,7 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
-        stage('Deploy'){
+        stage('Save Artifacts to Nexus'){
             when {
                 expression {
                     env.GIT_BRANCH == 'origin/main'
@@ -53,6 +55,24 @@ pipeline {
                 }
             }
         }
+        stage('Docker Build and Deploy') {
+//             when {
+//                 expression {
+//                     env.GIT_BRANCH == 'origin/main'
+//                 }
+//             }
+            steps {
+                script {
+                    // Docker build
+                    sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+
+                    // Stop and remove existing container if it exists
+                    sh "docker rm -f ${DOCKER_IMAGE} || true"
+
+                    // Deploy the container
+                    sh "docker run -d --name ${DOCKER_IMAGE} -p 8180:8180 ${DOCKER_IMAGE}:${DOCKER_TAG}"
+                }
+            }
+        }
     }
 }
-// pipeline test 6

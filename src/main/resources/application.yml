@@ -9,10 +9,12 @@ spring:
       globalcors:
         corsConfigurations:
           '[/**]':
-            allowedOrigins: "http://localhost:3000"
+            allowedOrigins:
+              - "http://localhost:3000"
+              - "http://localhost:3001"
             allowedMethods: "*"
             allowedHeaders: "*"
 
 # Enable the JwtAuthenticationFilter in Gateway
 server:
-  port: 8080
+  port: 8180
