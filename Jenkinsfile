@@ -56,20 +56,17 @@ pipeline {
             }
         }
         stage('Docker Build and Deploy') {
-//             when {
-//                 expression {
-//                     env.GIT_BRANCH == 'origin/main'
-//                 }
-//             }
+            when {
+                expression {
+                    env.GIT_BRANCH == 'origin/main'
+                }
+            }
             steps {
                 script {
-                    // Docker build
                     sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
 
-                    // Stop and remove existing container if it exists
                     sh "docker rm -f ${DOCKER_IMAGE} || true"
 
-                    // Deploy the container
                     sh "docker run -d --name ${DOCKER_IMAGE} -p 8180:8180 ${DOCKER_IMAGE}:${DOCKER_TAG}"
                 }
             }
