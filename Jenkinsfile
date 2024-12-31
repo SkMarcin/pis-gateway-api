@@ -56,11 +56,11 @@ pipeline {
             }
         }
         stage('Docker Build and Deploy') {
-            when {
-                expression {
-                    env.GIT_BRANCH == 'origin/main'
-                }
-            }
+//             when {
+//                 expression {
+//                     env.GIT_BRANCH == 'origin/main'
+//                 }
+//             }
             steps {
                 script {
                     sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
