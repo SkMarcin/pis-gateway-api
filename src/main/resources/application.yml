@@ -3,7 +3,7 @@ spring:
     gateway:
       routes:
         - id: Authentication
-          uri: http://localhost:8181
+          uri: http://auth-api:8005
           predicates:
             - Path=/auth/**
       globalcors:
