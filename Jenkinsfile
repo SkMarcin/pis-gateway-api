@@ -63,11 +63,7 @@ pipeline {
 //             }
             steps {
                 script {
-                    sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
-
-                    sh "docker rm -f ${DOCKER_IMAGE} || true"
-
-                    sh "docker run -d --name ${DOCKER_IMAGE} --network auth-api_shared-network -p 8180:8180 ${DOCKER_IMAGE}:${DOCKER_TAG}"
+                    sh "docker-compose up --force-recreate -d"
                 }
             }
         }

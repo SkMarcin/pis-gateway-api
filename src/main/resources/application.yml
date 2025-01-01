@@ -5,7 +5,7 @@ spring:
         - id: Authentication
           uri: http://auth-api:8005
           predicates:
-            - Path=/auth/**
+            - Path=/api/auth/**
       globalcors:
         corsConfigurations:
           '[/**]':
