@@ -1,0 +1,18 @@
+version: '3.8'
+
+networks:
+  shared-network:
+    name: shared-network
+    external: true
+    driver: bridge
+
+services:
+  gateway-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gateway-api
+    ports:
+      - "8180:8180"
+    networks:
+      - shared-network
