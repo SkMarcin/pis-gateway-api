@@ -16,7 +16,7 @@ public class JwtAuthenticationFilter implements GatewayFilter {
     private final WebClient webClient;
 
     public JwtAuthenticationFilter(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("http://localhost:8080/auth").build();
+        this.webClient = webClientBuilder.baseUrl("http://auth-api:8005/auth").build();
     }
 
     @Override
