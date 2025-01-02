@@ -66,7 +66,7 @@ pipeline {
 
                 sh "docker rm -f ${DOCKER_IMAGE} || true"
 
-                sh "docker run -d --name ${DOCKER_IMAGE} --network auth-api_shared-network -p 8180:8180 ${DOCKER_IMAGE}:${DOCKER_TAG}"
+                sh "docker run -d --name ${DOCKER_IMAGE} --network shared-network -p 8180:8180 ${DOCKER_IMAGE}:${DOCKER_TAG}"
             }
         }
     }
