@@ -12,6 +12,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: gateway-api
+    expose:
+      - "8180"
     ports:
       - "8180:8180"
     networks:
