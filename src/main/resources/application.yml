@@ -15,7 +15,7 @@ spring:
         - id: Loans
           uri: http://book-rent-api:8080
           predicates:
-            - Path=/loans**
+            - Path=/loans-api/**
 
       globalcors:
         corsConfigurations:

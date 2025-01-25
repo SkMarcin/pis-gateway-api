@@ -74,6 +74,7 @@ public class JwtAuthenticationGlobalFilter implements GlobalFilter {
                     // In case of an error (e.g., network error while calling auth service), return 401
                     exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                     System.out.println("Network error");
+                    System.out.println(e);
                     return exchange.getResponse().setComplete();
                 });
     }
