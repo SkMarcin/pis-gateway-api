@@ -39,6 +39,7 @@ public class JwtAuthenticationGlobalFilter implements GlobalFilter {
         String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
 
         // If the Authorization header is missing or malformed, return 401 UNAUTHORIZED
+        System.out.println(authHeader);
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
             return exchange.getResponse().setComplete();
@@ -65,12 +66,14 @@ public class JwtAuthenticationGlobalFilter implements GlobalFilter {
                     } else {
                         // If token is invalid, return 401 UNAUTHORIZED
                         exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+                        System.out.println("Invalid Token");
                         return exchange.getResponse().setComplete();
                     }
                 })
                 .onErrorResume(e -> {
                     // In case of an error (e.g., network error while calling auth service), return 401
                     exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+                    System.out.println("Network error");
                     return exchange.getResponse().setComplete();
                 });
     }
