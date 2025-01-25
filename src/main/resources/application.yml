@@ -1,4 +1,6 @@
 spring:
+  security:
+    enabled: false
   cloud:
     gateway:
       routes:
@@ -6,6 +8,11 @@ spring:
           uri: http://auth-api:8005
           predicates:
             - Path=/auth/**
+        - id: Books
+          uri: http://book-api:8006
+          predicates:
+            - Path=/book-api/**
+
       globalcors:
         corsConfigurations:
           '[/**]':
@@ -16,3 +23,5 @@ spring:
 # Enable the JwtAuthenticationFilter in Gateway
 server:
   port: 8180
+
+

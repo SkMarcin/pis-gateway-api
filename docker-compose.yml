@@ -1,0 +1,14 @@
+services:
+  gateway-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gateway-api
+    ports:
+      - "8180:8180"
+    networks:
+      - shared-network
+
+networks:
+  shared-network:
+    external: true
