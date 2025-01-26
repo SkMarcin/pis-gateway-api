@@ -16,6 +16,10 @@ spring:
           uri: http://book-rent-api:8080
           predicates:
             - Path=/loans-api/**
+        - id: UsersManagement
+          uri: http://user-management-api:8009
+          predicates:
+            - Path=/users-management/**
 
       globalcors:
         corsConfigurations:
