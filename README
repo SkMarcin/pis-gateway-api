@@ -1,0 +1,7 @@
+Run locally:
+
+docker build -t gateway-api
+
+docker rm -f gateway-api
+
+docker run -d --name gateway-api --network shared-network -p 8180:8180 gateway-api

@@ -1,18 +1,35 @@
 spring:
+  security:
+    enabled: false
   cloud:
     gateway:
       routes:
         - id: Authentication
-          uri: http://localhost:8005
+          uri: http://auth-api:8005
           predicates:
             - Path=/auth/**
+        - id: Books
+          uri: http://book-api:8006
+          predicates:
+            - Path=/book-api/**
+        - id: Loans
+          uri: http://book-rent-api:8080
+          predicates:
+            - Path=/loans-api/**
+        - id: UsersManagement
+          uri: http://user-management-api:8009
+          predicates:
+            - Path=/users-management/**
+
       globalcors:
         corsConfigurations:
           '[/**]':
-            allowedOrigins: "http://localhost:3000"
+            allowedOrigins: "*"
             allowedMethods: "*"
             allowedHeaders: "*"
 
 # Enable the JwtAuthenticationFilter in Gateway
 server:
-  port: 8080
+  port: 8180
+
+
